@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: machine-troubleshooting-guide:latest
+    container_name: troubleshooting-app
+    ports:
+      - "5000:5000"       # exposes backend API on host port 5000
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - GROQ_API_KEY=${GROQ_API_KEY}     # loads from your .env
+    restart: unless-stopped
